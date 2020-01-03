@@ -36,4 +36,23 @@ public class HomeController {
 		return "test";
 	}
 	
+	@RequestMapping("home")
+	public String home() {
+		return "home2";
+	}
+	
+	@RequestMapping("nav")
+	public String nav() {
+		return "nav";
+	}
+	
+	@RequestMapping("header")
+	public String header() {
+		return "header";
+	}
+	
+	@RequestMapping("mega")
+	public String mega() {
+		return "megamenu";
+	}
 }
