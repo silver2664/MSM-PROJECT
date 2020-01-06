@@ -38,7 +38,7 @@ public class HomeController {
 	
 	@RequestMapping("home")
 	public String home() {
-		return "home2";
+		return "home";
 	}
 	
 	@RequestMapping("nav")
@@ -49,10 +49,5 @@ public class HomeController {
 	@RequestMapping("header")
 	public String header() {
 		return "header";
-	}
-	
-	@RequestMapping("mega")
-	public String mega() {
-		return "megamenu";
 	}
 }
