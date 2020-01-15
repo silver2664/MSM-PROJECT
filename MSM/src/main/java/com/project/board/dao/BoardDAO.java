@@ -3,6 +3,7 @@ package com.project.board.dao;
 import java.util.List;
 
 import com.project.board.vo.BoardVO;
+import com.project.board.vo.Criteria;
 
 public interface BoardDAO {
 	
@@ -10,7 +11,10 @@ public interface BoardDAO {
 	public void write(BoardVO boardVO) throws Exception;
 	
 	// 리스트 조회
-	public List<BoardVO> list() throws Exception;
+	public List<BoardVO> list(Criteria cri) throws Exception;
+	
+	// 게시물 갯수
+	public int listCount() throws Exception;
 	
 	// 게시물 조회
 	public BoardVO read(int bno) throws Exception;

@@ -73,9 +73,33 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			var formObj = $("form[name='writeForm']");
+			$(".write_btn").on("click", function(){
+				if(fn_valiChk()){
+					return false;
+				}
+				formObj.attr("action", "/board/write");
+				formObj.attr("method", "post");
+				formObj.submit();
+			});
+		})
+		function fn_valiChk(){
+			var regForm = $("form[name='writeForm'] .chk").length;
+			for(var i = 0; i<regForm; i++){
+				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
+					alert($(".chk").eq(i).attr("title"));
+					return true;
+				}
+			}
+		}
+	</script>
+<!--  
 <script type = "text/javascript">
 $(document).ready(function(){
-	var formObj = $("form[name='writeForm']");
+	var formObj = $("#writeForm");
 	
 	$(".write_btn").on("cilck", function(){
 		if(fn_vailChk()){
@@ -88,14 +112,15 @@ $(document).ready(function(){
 });
 
 function fn_vailChk(){
-	var regForm = $("form[name='writeForm'] .chk").length;
+	var regForm = $('#writeForm').children('.chk').length;
 	for(var i = 0; i < regForm; i++){
-		if($(".chk").eq(i).val() == " " || $(".chk").eq(i).val() == null){
-			alert($(".chk").eq(i).attr("title"));
+		if($('.chk').eq(i).val() == "" || $('.chk').eq(i).val() == null){
+			alert($('.chk').eq(i).attr("title"));
 			return true;
 		}
 	}
 }
 </script>
+ -->
 </body>
 </html>
