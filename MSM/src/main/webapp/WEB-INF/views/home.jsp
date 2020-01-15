@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" session = "true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -11,6 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>Material Design Bootstrap</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -136,6 +137,12 @@ html, body, header, .carousel {
 	background-color : #e8eaf6
 }
 
+#logBtn {
+	width : 100%;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -153,12 +160,45 @@ html, body, header, .carousel {
 		<!-- Header Menu -->
 		<div class = "collapse navbar-collapse" id = "headerMenu">
 			<ul class = "navbar-nav ml-auto">
+				<!-- SignUP -->
 				<li class = "nav-item">
-					<a type = "button" class = "btn btn-link waves-effect" href = "#">sign up</a>
+					<a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a>					
 				</li>
+				<!-- //SignUp -->
+				<!-- LOGIN -->
 				<li class = "nav-item">
-					<a type = "button" class = "btn btn-link waves-effect" href = "#">sign in</a>
+					<a type = "button" class = "btn btn-link waves-effect" href = "#" onclick = "openNav2()" id = "login">sign in</a>
+					<div id = "mySidenav2" class = "sidenav">
+						<h3 class = "text-center text-white mb-5">Sign In</h3>
+						<div class = "container-fluid">
+							<section class = "text-center text-lg-center dark-gery-text">
+								<div class = "row">
+									<div class = "col-md-12">
+										<form class = "text-center" action = "login" method = "post">
+											<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+											<input type = "text" class = "form-control mb-4" name = "mId" placeholder = "ID" required>
+											<input type = "password" class = "form-control mb-4" name = "mPw" placeholder = "PassWord" required>
+											<div class = "col-md-12 d-flex justify-content-left">
+												<div>
+													<div class = "custom-control custom-checkbox">
+														<input type = "checkbox" class = "custom-control-input" id = "remember_me" checked>
+														<label class = "custom-control-label text-white" for = "remember_me">Remember Me</label>
+													</div>
+												</div>
+											</div>
+											<button class = "btn btn-primary text-white my-4" id = "logBtn" type = "submit">SIGN IN</button>
+											<p class = "text-white">Not Member?
+												<a data-toggle = "modal" href = "#signUp" style = "display : inline; color : white; padding : 4px; font-size : 16px">REGISTER</a>
+											</p>											
+										</form>
+									</div>		
+								</div>
+							</section>
+						</div>
+						<a href = "javascript:void(0)" class = "closebtn" onclick = "closeNav2()">&times;</a>
+					</div>
 				</li>
+				<!-- //LOGIN -->
 				<li class = "nav-item">				
 					<!-- My Account Sidebar Btn -->
 					<a type = "button" class = "btn btn-link waves-effect" href = "#" onclick = "openNav()">My Account</a>
@@ -174,6 +214,12 @@ html, body, header, .carousel {
 						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
 							BOARD
 						</a>
+						<form action = "logout" method = "post">
+							<input type = "submit" value = "LOGOUT"/>
+							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+							<!-- <a class = "btn btn-outline-white mb-5" href = "#" role = "button" type = "submit">
+								LOG OUT </a> -->	 						
+						</form>
 					</div>					
 				</li>
 			</ul>
@@ -788,6 +834,49 @@ html, body, header, .carousel {
     
 </footer>
 
+<!-- Modal Signup -->
+<div id="signUp" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h4 class="modal-title w-100 font-weight-bold">Sign Up</h4>
+				<button type = "button" class = "close" data-dismiss = "modal">
+					<span>&times;</span>
+				</button> 
+			</div>
+			<div class = "modal-body mx-3">
+				<div class = "md-form mb-5">					
+					<form action = "join" method = "post">
+						<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token }"/> 
+						<div class = "md-form mb-5">
+							<input type = "text" id = "mId" name = "mId" size = "50" class = "form-control validate mb-5" placeholder = "ID" required>
+							<label data-error = "wrong" data-success = "right" for = "mId"></label>
+						</div>
+						<div class = "md-form mb-5">
+							<input type = "password" id = "mPw" name = "mPw" size = "50" placeholder = "Password" class = "form-control validate mb-5" required>
+							<label data-error = "wrong" data-success = "right" for = "mPw"></label>
+						</div>
+						<!-- 
+						<div class = "md-form mb-5">
+							<input type = "password" id = "mPw2" name = "mPw2" size = "50" placeholder = "Password 확인" class = "form-control validate mb-5" required>
+							<label data-error = "wrong" data-success = "right" for = "mPw2"></label>
+						</div>
+						 -->
+						<div class = "md-form mb-5">
+							<input type = "email" id = "mEmail" name = "mEmail" size = "50" placeholder = "Email" class = "form-control validate mb-5" required>
+							<label data-error = "wrong" data-success = "right" for = "mEmail"></label>						
+						</div>
+						<div class = "d-flex justify-content-center">
+							<button class = "btn btn-primary" type = "submit">Sign Up</button>
+						</div>
+					</form>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Modal Signup -->
+
 
 
 
@@ -801,13 +890,40 @@ html, body, header, .carousel {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+<!-- 
+<script>
+
+$(document).ready(function(){
+	<c:choose>
+		<c:when test = "${not empty log}">
+			$("#login").text("LOG OUT");
+		</c:when>
+		<c:when test = "${not empty msg}"> //model의 속성이  msg값이 null이 아님 (로그아웃)
+			$("#login").text("LogOut 함");
+		</c:when>
+		<c:otherwise>
+			$("#login").text("Sign In");
+		</c:otherwise>
+	</c:choose>
+});
+
+</script>
+ -->
 <script>
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
 	}
+	
+function openNav2() {
+	  document.getElementById("mySidenav2").style.width = "30vw";
+	}
 
-	function closeNav() {
+function closeNav() {
 	  document.getElementById("mySidenav").style.width = "0";
+	}
+
+function closeNav2() {
+	  document.getElementById("mySidenav2").style.width = "0";
 	}
 </script>
 <script>
