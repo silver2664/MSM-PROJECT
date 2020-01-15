@@ -3,6 +3,8 @@ package com.project.msm.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +23,8 @@ import com.project.msm.util.Constant;
 
 @Controller
 public class BController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BController.class);
 	
 	private JdbcTemplate template;
 	private PlatformTransactionManager transactionManager;
@@ -55,6 +59,7 @@ public class BController {
 	
 	@RequestMapping("test")
 	public String test() {
+		logger.info("test modal!!");
 		return "testmodal";
 	}
 	

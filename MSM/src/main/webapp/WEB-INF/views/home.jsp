@@ -211,7 +211,7 @@ html, body, header, .carousel {
 						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
 							Cart
 						</a>
-						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
+						<a class = "btn btn-outline-white mb-5" href = "/board/list" role = "button">
 							BOARD
 						</a>
 						<form action = "logout" method = "post">

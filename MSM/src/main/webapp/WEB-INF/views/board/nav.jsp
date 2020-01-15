@@ -21,16 +21,12 @@
 </head>
 <body>
 
-<h6>GITHUB TEST Page</h6>
-<hr>
-<div>2020. 1. 15. am 09.26</div>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
+<div>
+	<div>
+		<a href = "/board/list">목록</a>
+		<a href = "/board/writeView">글 작성</a>
+	</div>
+</div>
 
 
 <!-- SCRIPTS -->

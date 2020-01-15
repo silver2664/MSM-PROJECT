@@ -11,6 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>Material Design Bootstrap</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -21,17 +22,53 @@
 </head>
 <body>
 
-<h6>GITHUB TEST Page</h6>
-<hr>
-<div>2020. 1. 15. am 09.26</div>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-
+<div id="root">
+			<header>
+				<h1> 게시판</h1>
+			</header>
+			<hr />
+			 
+			<%@include file = "nav.jsp" %>
+			
+			<hr />
+			
+			<section id="container">
+				<form name="updateForm" role="form" method="post" action="/board/update">
+					<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+					<input type="hidden" name="bno" value="${update.bno}" readonly="readonly"/>
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									<label for="title">제목</label><input type="text" id="title" name="title" value="${update.title}"/>
+								</td>
+							</tr>	
+							<tr>
+								<td>
+									<label for="content">내용</label><textarea id="content" name="content"><c:out value="${update.content}" /></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${update.writer}" readonly="readonly"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="regdate">작성날짜</label>
+									<fmt:formatDate value="${update.regdate}" pattern="yyyy-MM-dd"/>					
+								</td>
+							</tr>		
+						</tbody>			
+					</table>
+					<div>
+						<button type="submit" class="update_btn">저장</button>
+						<button type="submit" class="cancel_btn">취소</button>
+					</div>
+				</form>
+			</section>
+			<hr />
+		</div>
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
@@ -42,5 +79,13 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".cancel_btn").on("click", function(){
+		event.preventDefault();	
+		location.href = "/board/list";
+	});
+});
+</script>
 </body>
 </html>

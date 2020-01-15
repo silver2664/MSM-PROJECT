@@ -11,6 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>Material Design Bootstrap</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -21,17 +22,39 @@
 </head>
 <body>
 
-<h6>GITHUB TEST Page</h6>
-<hr>
-<div>2020. 1. 15. am 09.26</div>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-<p>plus test page</p>
-
+<div id="root">
+			<header>
+				<h1> 게시판</h1>
+			</header>
+			<hr />
+			 
+			<%@include file = "nav.jsp" %>
+			
+			<hr />
+			
+			<section id="container">
+				<form role="form" method="post" action="/board/write">
+				<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+					<table>
+						<tr><th>번호</th><th>제목</th><th>작성자</th><th>등록일</th></tr>
+						
+						<c:forEach items="${list}" var = "list">
+							<tr>
+								<td><c:out value="${list.bno}" /></td>
+								<td>
+									<a href="/board/readView?bno=${list.bno}"><c:out value="${list.title}" /></a>
+								</td>
+								<td><c:out value="${list.writer}" /></td>
+								<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></td>
+							</tr>
+						</c:forEach>
+						
+					</table>
+				</form>
+			</section>
+			<hr />
+		</div>
+	</body>
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
