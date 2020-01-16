@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.project.board.vo.BoardVO;
-import com.project.board.vo.Criteria;
+import com.project.board.vo.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -24,14 +24,14 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		// 리스트 조회
 		@Override
-		public List<BoardVO> list(Criteria cri) throws Exception {			
-			return sqlSession.selectList("boardMapper.listPage", cri);			
+		public List<BoardVO> list(SearchCriteria scri) throws Exception {			
+			return sqlSession.selectList("boardMapper.listPage", scri);			
 		}
 		
 		// 게시물 갯수
 		@Override
-		public int listCount() throws Exception {
-			return sqlSession.selectOne("boardMapper.listCount");
+		public int listCount(SearchCriteria scri) throws Exception {
+			return sqlSession.selectOne("boardMapper.listCount", scri);
 		}
 		
 		// 게시물 조회

@@ -34,8 +34,14 @@
 			
 			<section id="container">
 				<form id = "readForm" role="form" method="post">
-				<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-					<table>
+					<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+					<input type = "hidden" id = "bno" name = "bno" value = "${read.bno}"/>
+					<input type = "hidden" id = "page" name = "page" value = "${scri.page}">
+					<input type = "hidden" id = "perPageNum" name = "perPageNum" value = "${scri.perPageNum}">
+					<input type = "hidden" id = "serachType" name = "searchType" value = "${scri.searchType}">
+					<input type = "hidden" id = "keyword" name = "keyword" value = "${scri.keyword}">
+				</form>
+					<table>				
 						<tbody>
 							<tr>
 								<td>
@@ -70,7 +76,43 @@
 						<button type="submit" class="delete_btn" id = "delete_btn">삭제</button>
 						<button type="submit" class="list_btn" id = "list_btn">목록</button>	
 					</div>
-				</form>
+					
+					<!-- 댓글 -->
+					<div id="reply">
+  						<ul class="replyList">
+    						<c:forEach items="${replyList}" var="replyList">
+      							<li>
+        							<p>
+       									작성자 : ${replyList.writer}<br />
+       									작성 날짜 :  <fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" />
+        							</p>
+        							<p>${replyList.content}</p>
+      							</li>
+    						</c:forEach>   
+  						</ul>
+					</div>
+					
+					<!-- 댓글 작성 -->
+					<form name="replyForm" method="post">
+						<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+ 						<input type="hidden" id="bno" name="bno" value="${read.bno}" />
+  						<input type="hidden" id="page" name="page" value="${scri.page}"> 
+  						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
+  						<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
+  						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+
+  						<div>
+    						<label for="writer">댓글 작성자</label><input type="text" id="writer" name="writer" />
+    						<br/>
+    						<label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+  						</div>
+  						<div>
+ 	 						<button type="button" class="replyWriteBtn">작성</button>
+ 	 						<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
+  							<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
+  						</div>
+					</form>
+					
 			</section>
 			<hr />
 		</div>
@@ -99,7 +141,7 @@ $(document).ready(function(){
 	//취소
 	$("#list_btn").on("click", function(){
 		event.preventDefault(); 
-		location.href = "/board/list";
+		location.href = "/board/list?page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}";
 	});
 	
 	//삭제
@@ -114,6 +156,33 @@ $(document).ready(function(){
 			event.preventDefault();
 			location.href = "/board/list";
 		}
+	});
+	
+	//댓글쓰기
+	$(".replyWriteBtn").on("click", function(){
+		  var formObj = $("form[name='replyForm']");
+		  formObj.attr("action", "/board/replyWrite");
+		  formObj.submit();
+		});
+	
+	//댓글 수정 View
+	$(".replyUpdateBtn").on("click", function(){
+		location.href = "/board/replyUpdateView?bno=${read.bno}"
+						+ "&page=${scri.page}"
+						+ "&perPageNum=${scri.perPageNum}"
+						+ "&searchType=${scri.searchType}"
+						+ "&keyword=${scri.keyword}"
+						+ "&rno="+$(this).attr("data-rno");
+	});
+			
+	//댓글 삭제 View
+	$(".replyDeleteBtn").on("click", function(){
+		location.href = "/board/replyDeleteView?bno=${read.bno}"
+			+ "&page=${scri.page}"
+			+ "&perPageNum=${scri.perPageNum}"
+			+ "&searchType=${scri.searchType}"
+			+ "&keyword=${scri.keyword}"
+			+ "&rno="+$(this).attr("data-rno");
 	});
 });
 </script>
