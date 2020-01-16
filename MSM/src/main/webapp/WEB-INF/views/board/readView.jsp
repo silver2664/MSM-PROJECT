@@ -79,7 +79,7 @@
 					
 					<!-- 댓글 -->
 					<div id="reply">
-  						<ul class="replyList">
+  						<ol class="replyList">
     						<c:forEach items="${replyList}" var="replyList">
       							<li>
         							<p>
@@ -89,7 +89,7 @@
         							<p>${replyList.content}</p>
       							</li>
     						</c:forEach>   
-  						</ul>
+  						</ol>
 					</div>
 					
 					<!-- 댓글 작성 -->
@@ -108,8 +108,7 @@
   						</div>
   						<div>
  	 						<button type="button" class="replyWriteBtn">작성</button>
- 	 						<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
-  							<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
+ 	 						<!-- 댓글 수정, 삭제 버튼 구현 X data-rno = "읍읍" 가 500 오류 java.lang.NumberFormatException 으로 인하여 구동 X -->
   						</div>
 					</form>
 					

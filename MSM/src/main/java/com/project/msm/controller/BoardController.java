@@ -150,7 +150,7 @@ public class BoardController {
 		
 		logger.info("reply Write");
 		
-		model.addAttribute("replyUpdat", replyService.selectReply(vo.getRno()));
+		model.addAttribute("replyUpdate", replyService.selectReply(vo.getRno()));
 		model.addAttribute("scri", scri);
 		
 		return "board/replyUpdateView";

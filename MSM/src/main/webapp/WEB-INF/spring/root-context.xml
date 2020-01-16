@@ -57,5 +57,8 @@
     <context:component-scan base-package="com.project.board.service"></context:component-scan>
     <context:component-scan base-package="com.project.board.dao"></context:component-scan>
     <context:component-scan base-package="com.project.board.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.goods.service"></context:component-scan>
+    <context:component-scan base-package="com.project.goods.dao"></context:component-scan>
+    <context:component-scan base-package="com.project.goods.vo"></context:component-scan>
 		
 </beans>
