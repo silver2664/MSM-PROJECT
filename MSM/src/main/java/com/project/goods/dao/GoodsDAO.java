@@ -7,7 +7,7 @@ import com.project.goods.vo.GoodsVO;
 public interface GoodsDAO {
 	
 	// 01. 惑前格废
-	public List<GoodsVO> listProduct();
+	public List<GoodsVO> listProduct() throws Exception;
 	
 	// 02. 惑前惑技
 	public GoodsVO detailProduct(int mgNum);

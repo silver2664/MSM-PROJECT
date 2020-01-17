@@ -8,7 +8,7 @@
 <select id = "listProduct" resultType = "com.project.goods.vo.GoodsVO">
 	SELECT	MGNUM, MGNAME, MGPRICE, MGCONTENT, MGIMG
 	FROM EX_GOODS
-	ORDER BY MGNUM
+	ORDER BY MGNUM DESC
 </select>
 
 <!-- 02. 상품 상세 보기 -->

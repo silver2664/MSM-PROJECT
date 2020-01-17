@@ -26,7 +26,7 @@
 
 <div id="root">
 			<header>
-				<h1> 게시판</h1>
+				<h1> 게시판 </h1>
 			</header>
 			<hr />
 			 

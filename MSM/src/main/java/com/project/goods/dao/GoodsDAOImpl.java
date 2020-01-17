@@ -16,7 +16,7 @@ public class GoodsDAOImpl implements GoodsDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List<GoodsVO> listProduct() {
+	public List<GoodsVO> listProduct() throws Exception {
 		return sqlSession.selectList("goodsMapper.listProduct");
 	}
 

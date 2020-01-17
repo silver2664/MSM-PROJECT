@@ -17,7 +17,7 @@ public class GoodsServiceImpl implements GoodsService {
 	GoodsDAO dao;
 	
 	@Override
-	public List<GoodsVO> listProduct() {
+	public List<GoodsVO> listProduct() throws Exception {
 		return dao.listProduct();
 	}
 

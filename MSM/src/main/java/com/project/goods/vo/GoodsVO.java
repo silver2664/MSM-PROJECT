@@ -61,6 +61,6 @@ public class GoodsVO {
 	@Override
 	public String toString() {
 		return "GoodsVO [mgNum=" + mgNum + ", mgName=" + mgName + ", mgPrice=" + mgPrice + ", mgContent=" + mgContent + ", mgImg="
-				+ mgImg + "productPhoto=" + productPhoto + "]";
+				+ mgImg + "]";
 	}
 }

@@ -109,6 +109,8 @@
   						<div>
  	 						<button type="button" class="replyWriteBtn">작성</button>
  	 						<!-- 댓글 수정, 삭제 버튼 구현 X data-rno = "읍읍" 가 500 오류 java.lang.NumberFormatException 으로 인하여 구동 X -->
+ 	 						<button type = "button" class = "replyUpdateBtn" data-rno = "${reply.rno}">수정</button>
+ 	 						<button type = "button" class = "replyDeleteBtn" data-rno = "${reply.rno}">삭제</button>
   						</div>
 					</form>
 					
