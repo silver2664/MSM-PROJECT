@@ -71,5 +71,8 @@
     <context:component-scan base-package="com.project.goods.service"></context:component-scan>
     <context:component-scan base-package="com.project.goods.dao"></context:component-scan>
     <context:component-scan base-package="com.project.goods.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.member.vo"></context:component-scan>
+    <context:component-scan base-package="com.project.member.dao"></context:component-scan>
+    <context:component-scan base-package="com.project.member.service"></context:component-scan>
 		
 </beans>

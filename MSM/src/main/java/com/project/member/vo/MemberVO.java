@@ -1,5 +1,6 @@
 package com.project.member.vo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,6 +24,7 @@ public class MemberVO implements UserDetails {
     M_SECOND_ADDR VARCHAR2(200),
     AUTHORITY VARCHAR2(50) DEFAULT 'ROLE_USER' NOT NULL,
     ENABLED NUMBER(3) DEFAULT 1,
+    REGDATE DATE FEFAULT SYSDATE,
     CONSTRAINT PK_MSM_MEMBER PRIMARY KEY (MID)    
 	); 
 	 
@@ -38,12 +40,15 @@ public class MemberVO implements UserDetails {
 	private String mZip_Code;
 	private String mFirst_Addr;
 	private String mSecond_Addr;
-	private Collection <? extends GrantedAuthority> authority;
+	private String authority;
 	private boolean enabled;
+	private Date regDate;
 	
 	@Override
 	public Collection <? extends GrantedAuthority> getAuthorities(){
-		return this.authority;
+		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		auth.add(new SimpleGrantedAuthority(authority));
+		return auth;
 	}
 	
 	@Override
@@ -140,15 +145,23 @@ public class MemberVO implements UserDetails {
 		this.mSecond_Addr = mSecond_Addr;
 	}
 
+	public String getAuthority() {
+		return authority;
+	}
 
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	
-	
-	
-	
-
 }

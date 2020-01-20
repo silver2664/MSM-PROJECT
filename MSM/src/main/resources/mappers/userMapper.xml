@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userMapper">
+
+	<!-- Email select -->
+	<select id = "selectByEmail" resultType = "com.project.member.vo.MemberVO">
+	<![CDATA[
+		SELECT
+			MEMAIL,
+			MNAME
+		FROM
+			MSM_MEMBER
+		WHERE
+			EMAIL = #{mEmail}
+	]]>
+	</select>
+	
+	<!-- ID select -->
+	<select id = "selectByID" resultType = "com.project.member.vo.MemberVO">
+	<![CDATA[
+		SELECT
+			MID,
+			MNAME
+		FROM
+			MSM_MEMBER
+		WHERE
+			ID = #{mId}
+	]]>
+	</select>
+	
+	<!-- Sign Up SQL -->
+	<insert id = "register">
+		<![CDATA[
+			INSERT INTO MSM_MEMBER
+			(
+				MID,
+				MPW,
+				MNAME,
+				MEMAIL
+			)
+			VALUES
+			(
+				#{mId},
+				#{mPw},
+				#{mName},
+				#{mEmail}				
+			)
+		]]>		
+	</insert>
+	
+</mapper>

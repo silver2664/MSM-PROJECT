@@ -91,7 +91,7 @@
 		<listner-class>org.springframework.web.context.context.ContextLoaderListner</listner-class>
 	</listner>
 	
-	
+	<!--  
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SSL Forward</web-resource-name>
@@ -102,7 +102,7 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	 
+	  -->
 	 
 	 
 </web-app>

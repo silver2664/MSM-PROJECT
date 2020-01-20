@@ -35,7 +35,7 @@ public class BoardController {
 	// 게시판 글 작성 화면
 	@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
 	public void writeView() throws Exception{
-		logger.info("writeView");		
+		logger.info("writeView");
 	}
 	
 	// 게시판 글 작성

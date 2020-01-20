@@ -39,7 +39,8 @@
 			<ul class = "navbar-nav ml-auto">
 				<!-- SignUP -->
 				<li class = "nav-item">					
-					<a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a>		
+					<!-- <a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a> -->		
+					<a type = "button" class = "btn btn-link waves-effect" href = "/member/step1">SIGN UP</a>
 				</li>
 				<!-- //SignUp -->
 				<!-- LOGIN -->
@@ -1161,6 +1162,7 @@
 </footer>
 
 <!-- Modal Signup -->
+<!-- 
 <div id="signUp" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -1182,12 +1184,12 @@
 							<input type = "password" id = "mPw" name = "mPw" size = "50" placeholder = "Password" class = "form-control validate mb-5" required>
 							<label data-error = "wrong" data-success = "right" for = "mPw"></label>
 						</div>
-						<!-- 
+						
 						<div class = "md-form mb-5">
 							<input type = "password" id = "mPw2" name = "mPw2" size = "50" placeholder = "Password 확인" class = "form-control validate mb-5" required>
 							<label data-error = "wrong" data-success = "right" for = "mPw2"></label>
 						</div>
-						 -->
+						
 						<div class = "md-form mb-5">
 							<input type = "email" id = "mEmail" name = "mEmail" size = "50" placeholder = "Email" class = "form-control validate mb-5" required>
 							<label data-error = "wrong" data-success = "right" for = "mEmail"></label>						
@@ -1201,6 +1203,7 @@
 		</div>
 	</div>
 </div>
+ -->
 <!-- //Modal Signup -->
 
 
