@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 public class MemberVO implements UserDetails {
 	
 	/* Oracle DB Member TABLE
@@ -37,14 +38,12 @@ public class MemberVO implements UserDetails {
 	private String mZip_Code;
 	private String mFirst_Addr;
 	private String mSecond_Addr;
-	private String authority;
+	private Collection <? extends GrantedAuthority> authority;
 	private boolean enabled;
 	
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities(){
-		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
-		auth.add(new SimpleGrantedAuthority(authority));
-		return auth;
+	public Collection <? extends GrantedAuthority> getAuthorities(){
+		return this.authority;
 	}
 	
 	@Override
@@ -141,13 +140,7 @@ public class MemberVO implements UserDetails {
 		this.mSecond_Addr = mSecond_Addr;
 	}
 
-	public String getAuthority() {
-		return authority;
-	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;

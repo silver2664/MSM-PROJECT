@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,139 +20,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
-<style type="text/css">
-html, body, header, .carousel {
-	height: 60vh;
-}
-
-@media ( max-width : 740px) {
-	html, body, header, .carousel {
-		height: 100vh;
-	}
-}
-
-@media ( min-width : 800px) and (max-width: 850px) {
-	html, body, header, .carousel {
-		height: 100vh;
-	}
-}
-
-.view, body, html {
-	height: 100%
-}
-
-.carousel {
-	height: 65%
-}
-
-.carousel .carousel-inner, .carousel .carousel-inner .active, .carousel .carousel-inner .carousel-item
-	{
-	height: 100%
-}
-
-@media ( max-width :776px) {
-	.carousel {
-		height: 100%
-	}
-}
-
-.page-footer {
-	background-color: #5e35b1
-}
-
-.mega-dropdown {
-	position : static;
-}
-
-.mega-menu {
-	position : absolute;
-	width : 100vw;
-	left : 0;
-	right : 0;
-	padding : 5px;
-}
-
-.menu-item {
-	padding : 5px 0;
-}
-
-.sub-title {
-	font-family : BigNoodle;
-}
-
-.gallery {
-        -webkit-column-count: 3;
-        -moz-column-count: 3;
-        column-count: 3;
-        -webkit-column-width: 33%;
-        -moz-column-width: 33%;
-        column-width: 33%; 
-}
-
-.logo1 {
-	
-	width : 100vw;
-	height : 200px;
-}
-
-.sidenav {
-	height : 100%;
-	width : 0;
-	position : fixed;
-	z-index : 1;
-	top : 0;
-	right : 0;
-	background-color : #111;
-	overflow-x : hidden;
-	transition : 0.5s;
-	padding-top : 60px;	
-}
-
-.sidenav a {
-	padding : 8px 8px 8px 32px;
-	text-decoration : none;
-	font-size : 25px;
-	color : #818181;
-	display : block;
-	transition : 0.3s;
-}
-
-.sidenav .closebtn {
-	position : absolute;
-	top : 0;
-	right : 25px;
-	font-size : 36px;
-	margin-left : 50px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-
-#pol1 {
-	background-color : #f3e5f5
-}
-
-#pol2 {
-	background-color : #e8eaf6
-}
-
-#logBtn {
-	width : 100%;
-}
-.md-pills .nav-link.active {
-        color: #fff;
-        background-color: #616161;
-}
-      
-.new-arrival {
-      	resize: both; /* 이미지 최대 사이즈에 적용 */
-   		float: center; /* 가운데 정렬 */
-   		max-width: 900px; /* 넓이를 지정 */
-   		max-height: 170px; /* 높이를 지정 */
-}
-</style>
+<link href = "resources/css/home.css" rel = "stylesheet"> <!-- resources/css/home.css 로 style 관리 -->
 </head>
 <body>
 <!-- Header Navbar -->
@@ -169,14 +38,22 @@ html, body, header, .carousel {
 		<div class = "collapse navbar-collapse" id = "headerMenu">
 			<ul class = "navbar-nav ml-auto">
 				<!-- SignUP -->
-				<li class = "nav-item">
-					<a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a>					
+				<li class = "nav-item">					
+					<a type = "button" class = "btn btn-link waves-effect" data-toggle = "modal" data-target = "#signUp" style = "color : black">sign up</a>		
 				</li>
 				<!-- //SignUp -->
 				<!-- LOGIN -->
 				<li class = "nav-item">
-					<a type = "button" class = "btn btn-link waves-effect" href = "#" onclick = "openNav2()" id = "login">sign in</a>
-					<div id = "mySidenav2" class = "sidenav">
+					<sec:authorize access = "isAnonymous()">
+						<a type = "button" class = "btn btn-link waves-effect" href = "#" onclick = "openNav2()" id = "login">sign in</a>
+					</sec:authorize>
+					<sec:authorize access = "isAuthenticated()">
+						<form action = "logout" method = "post">
+							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+							<button type = "submit" class = "btn btn-link waves-effect" style = "color : black">sign out</button>
+						</form>
+					</sec:authorize>
+					<div id = "mySidenav2" class = "sidenav">				
 						<h3 class = "text-center text-white mb-5">Sign In</h3>
 						<div class = "container-fluid">
 							<section class = "text-center text-lg-center dark-gery-text">
@@ -197,7 +74,16 @@ html, body, header, .carousel {
 											<button class = "btn btn-primary text-white my-4" id = "logBtn" type = "submit">SIGN IN</button>
 											<p class = "text-white">Not Member?
 												<a data-toggle = "modal" href = "#signUp" style = "display : inline; color : white; padding : 4px; font-size : 16px">REGISTER</a>
-											</p>											
+											</p>
+											<c:if test ="${not empty param.fail}">
+												<div class = col-md-12>
+													<font color = "red">
+														<p>Your SIGN IN attempt was not successful, try again.</p>
+														<p>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>														
+													</font>
+													<c:remove scope = "session" var = "SPRING_SECURITY_LAST_EXCEPTION"/>
+												</div>
+											</c:if>											
 										</form>
 									</div>		
 								</div>
@@ -222,12 +108,12 @@ html, body, header, .carousel {
 						<a class = "btn btn-outline-white mb-5" href = "/board/list" role = "button">
 							BOARD
 						</a>
+						<sec:authorize access = "isAuthenticated()">
 						<form action = "logout" method = "post">
-							<input type = "submit" value = "LOGOUT"/>
 							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
-							<!-- <a class = "btn btn-outline-white mb-5" href = "#" role = "button" type = "submit">
-								LOG OUT </a> -->	 						
+							<button type = "submit" class = "btn btn-outline-white mb-5" style = "color : black" id = "signOut1">Sign Out</button>
 						</form>
+					</sec:authorize>
 					</div>					
 				</li>
 			</ul>
@@ -337,7 +223,7 @@ html, body, header, .carousel {
 							<div class="col-md-6 col-xl-3 sub-menu mb-xl-0 mb-4">
 								<h6 class="sub-title text-uppercase font-weight-bold">ACCESSORY</h6>
 								<ul class="list-unstyled">
-									<li><a href="#" class="menu-item">AAS-Studio</a></li>
+									<li><a href="/product/listView" class="menu-item">AAS-Studio</a></li>
 									<li><a href="#" class="menu-item">Example01</a></li>
 									<li><a href="#" class="menu-item">Example02</a></li>
 								</ul>
@@ -1330,25 +1216,7 @@ html, body, header, .carousel {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
-<!-- 
-<script>
 
-$(document).ready(function(){
-	<c:choose>
-		<c:when test = "${not empty log}">
-			$("#login").text("LOG OUT");
-		</c:when>
-		<c:when test = "${not empty msg}"> //model의 속성이  msg값이 null이 아님 (로그아웃)
-			$("#login").text("LogOut 함");
-		</c:when>
-		<c:otherwise>
-			$("#login").text("Sign In");
-		</c:otherwise>
-	</c:choose>
-});
-
-</script>
- -->
 <script>
 function openNav() {
 	  document.getElementById("mySidenav").style.width = "30vw";
@@ -1365,13 +1233,6 @@ function closeNav() {
 function closeNav2() {
 	  document.getElementById("mySidenav2").style.width = "0";
 	}
-</script>
-<script>
-$(function(){
-	$('.material-tooltip-main').tooltip({
-	    template: '<div class="tooltip md-tooltip"><div class="tooltip-arrow md-arrow"></div><div class="tooltip-inner md-inner"></div></div>'
-	  });
-})
 </script>
 </body>
 </html>

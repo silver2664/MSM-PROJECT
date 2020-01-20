@@ -52,6 +52,17 @@
 	
 	<!-- Password Encoder -->
 	<bean name = "passwordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!-- security 로그인 실패 시 메세지  -->
+	<bean id = "messageSource" class = "org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name = "basenames">
+			<list>
+				<value>/WEB-INF/messages/spring_security_messages</value>
+			</list>
+		</property>
+		<property name = "defaultEncoding" value = "UTF-8"/>
+		<property name = "cacheSeconds" value = "5" />
+	</bean>
     
     <!-- scan -->
     <context:component-scan base-package="com.project.board.service"></context:component-scan>

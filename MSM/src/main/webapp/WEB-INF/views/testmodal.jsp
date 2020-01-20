@@ -53,7 +53,8 @@
 	<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />						
 </form>
 
-<a href = "/board/writeView">BOARD</a>
+<a href = "/board/writeView">BOARD</a><br/>
+<a href = "/home">home</a>
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
