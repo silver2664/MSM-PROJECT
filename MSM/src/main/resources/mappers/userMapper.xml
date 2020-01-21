@@ -14,7 +14,7 @@
 		FROM
 			MSM_MEMBER
 		WHERE
-			EMAIL = #{mEmail}
+			MEMAIL = #{mEmail}
 	]]>
 	</select>
 	
@@ -27,7 +27,7 @@
 		FROM
 			MSM_MEMBER
 		WHERE
-			ID = #{mId}
+			MID = #{mId}
 	]]>
 	</select>
 	
@@ -39,14 +39,22 @@
 				MID,
 				MPW,
 				MNAME,
-				MEMAIL
+				MEMAIL,
+				MPHONE,
+				MZIP_CODE,
+				M_FIRST_ADDR,
+				M_SECOND_ADDR
 			)
 			VALUES
 			(
 				#{mId},
 				#{mPw},
 				#{mName},
-				#{mEmail}				
+				#{mEmail},
+				#{mPhone},
+				#{mZip_Code},
+				#{mFirst_Addr},
+				#{mSecond_Addr}				
 			)
 		]]>		
 	</insert>

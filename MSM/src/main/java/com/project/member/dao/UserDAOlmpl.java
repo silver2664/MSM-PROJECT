@@ -26,7 +26,7 @@ public class UserDAOlmpl implements UserDAO {
 
 	@Override
 	public void insertUser(RegisterRequest regReq) throws Exception {
-		sqlSession.insert("userMapper.insert", regReq);
+		sqlSession.insert("userMapper.register", regReq);
 
 	}
 

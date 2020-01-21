@@ -81,17 +81,17 @@
 	
 	<!-- 로그인 중복방지 -->
 	
-	<listner>
-		<listner-class>org.springframework.security.web.session.HttpSessionEventPublisher</listner-class>
-	</listner>
+	<listener>
+		<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
 	
 	<!-- Security listner -->
-	
-	<listner>
-		<listner-class>org.springframework.web.context.context.ContextLoaderListner</listner-class>
-	</listner>
-	
 	<!--  
+	<listener>
+		<listener-class>org.springframework.web.context.context.ContextLoaderListner</listener-class>
+	</listener>
+	 -->
+	
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SSL Forward</web-resource-name>
@@ -102,7 +102,7 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	  -->
+	
 	 
 	 
 </web-app>

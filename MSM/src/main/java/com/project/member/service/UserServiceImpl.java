@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		MemberVO mId = userDAO.selectById(regReq.getmId());
+		
 		if(mId != null) {
 			throw new AlreadyExistingIdException(regReq.getmId() + "is duplicate email.");
 		}

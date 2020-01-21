@@ -34,7 +34,7 @@ public class UserController {
 	@RequestMapping("/member/step2")
 	public ModelAndView step2(@RequestParam(value="agree", defaultValue="false") Boolean agree) throws Exception {
 		if(!agree) {
-			ModelAndView mv = new ModelAndView("/memeber/step2");
+			ModelAndView mv = new ModelAndView("/member/step1");
 			return mv;
 		}
 		ModelAndView mv = new ModelAndView("/member/step2");
@@ -57,12 +57,12 @@ public class UserController {
 			userService.insertUser(regReq);
 		}
 		catch (AlreadyExistingEmailException e) {
-			errors.rejectValue("email", "duplicate", "이미 가입된 이메일입니다.");
+			errors.rejectValue("mEmail", "duplicate", "이미 가입된 이메일입니다.");
 			mv.setViewName("/member/step2");
 			return mv;
 		}
 		catch (AlreadyExistingIdException e) {
-			errors.rejectValue("ID", "duplicate", "이미 가입된 ID입니다.");
+			errors.rejectValue("mId", "duplicate", "이미 가입된 ID입니다.");
 			mv.setViewName("/member/step2");
 			return mv;
 		}
