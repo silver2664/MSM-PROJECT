@@ -37,7 +37,7 @@
 			<div class = "form-group">
 				<label for = "mId">아이디</label>
 				<input type = "text" class = "form-control" id = "mId" name = "mId" placeholder = "ID"/>
-				<div class = "eheck_font" id = "id_check"></div>
+				<div class = "eheck_font" id = "id_check"></div>				
 			</div>
 			
 			<div class = "form-group">
@@ -94,41 +94,6 @@
 	</div>
 </div>
 
-<!-- Validator 유효성 검증 -->
-<!-- 
-<div class="panel-body">
-    <div class="row">
-        <div class="col-lg-6">
-            <form:form role="form" commandName="registerRequest" action="/member/step3" method="post">
-                <div class="form-group input-group">
-                    <form:input type="text" class="form-control" placeholder="ID" path="mId"/>
-                    <form:errors path="mId"/>
-                </div>
-                <div class="form-group input-group">
-                    <form:input type="mEmail" class="form-control" placeholder="Email" path="mEmail"/>
-                    <form:errors path="mEmail"/>
-                </div>
-                <div class="form-group input-group">
-                    <form:input type="text" class="form-control" placeholder="Name" path="mName"/>
-                    <form:errors path="mName"/>
-                </div>
-                <div class="form-group input-group">
-                    <form:password class="form-control" placeholder="Password" path="mPw"/>
-                    <form:errors path="mPw"/>
-                </div>
-                <div class="form-group input-group">
-                    <form:password class="form-control" placeholder="Password Check" path="checkPw"/>
-                    <form:errors path="checkPw"/>
-                </div>
-                <button type="submit" class="btn btn-default">가입하기</button>
-                <button type="reset" class="btn btn-default">취소하기</button>
-            </form:form>
-        </div>
-    </div>
-</div>
- -->
-
-
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -139,8 +104,88 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
 <!-- DAUM 주소 API -->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type = "text/javascript">
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+$(document).ready(function(){	
+	
+	var idJ = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
+	var pwJ = /^[A-Za-z0-9]{4,12}$/;
+	
+	// ID 중복 확인
+	$('#mId').blur(function(){
+		if($('#mId').val() == ''){
+			$("#id_check").text('아이디를 입력하세요.');
+			$("#id_check").css("color", "red");
+		} else if(idJ.test($("#mId").val()) != true){
+			$("#id_check").text('4-12자의 영문, 숫자만 사용 가능합니다.');
+			$("#id_check").css("color", "red");			
+		} else if($("#mId").val()!=''){
+			var mId = $('#mId').val();
+		
+			$.ajax({
+				async : true,
+				type : 'POST',
+				data : mId,
+				datatype : 'json',
+				url : "/member/idCheck",
+				contentType : "application/json; charset=UTF-8",
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success : function(data){
+					console.log("data : " + data);
+					if(data.cnt > 0 ){
+						$("#id_check").text('중복된 아이디입니다.');
+						$("#usercheck").attr('disabled', true);
+					} else {
+						if(idJ.test(mId)){
+							$('#id_check').text('사용 가능한 ID입니다.');
+							$('#id_check').css('color', 'blue');
+							$('#usercheck').attr('disabled', false);
+						}
+						else if (mId = ''){
+							$('#id_check').text('ID를 입력해주세요.');
+							$('#id_check').css('color', 'blue');
+							$('#usercheck').attr('disabled', true);
+						}
+						else {
+							$('#id_check').text('ID는 소문자와 숫자 4-12 자리만 가능합니다.');
+							$('#id_check').css('color', 'red');
+							$('#usercheck').attr('disabled', true);
+						}
+					}
+				},
+				error : function(request, status, error){
+					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}
+	});
+	
+	$('#mPw').blur(function(){
+		if(pwJ.test($('#mPw').val())){
+			consolse.log('true');
+			$('#pw_check').text('');
+		} else {
+			console.log('false');
+			$('#pw_check').text('4-12 자의 문자, 숫자로만 사용 가능합니다.');
+			$('#pw_check').css('color', 'red');
+		}
+	});
+	
+	// 패스워드 일치 확인
+	$('#mPw2').blur(function(){
+		if($('#mPw').val() != $(this).val()){
+			$('#mPw2').text('비밀번호가 일치 하지 않습니다.');
+			$('#mPw2').css('color', 'red');
+		} else {
+			$('#pw2_check').text('');
+		}
+	});
+});
+
+</script>
+<script>
 
 //모든 공백 체크 정규식
 var empJ = /\s/g;
@@ -158,8 +203,8 @@ var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var address = $('#mSecond_Addr');
 
 $(document).ready(function(){
-	
-	var address = $()'#mSecond_Addr');
+		
+	var address = $('#mSecond_Addr');
 	
 	// ID 중복 확인
 	$("#mId").blur(function(){
@@ -175,6 +220,7 @@ $(document).ready(function(){
 				type : 'POST',
 				data : mId,
 				datatype : 'json',
+				url : "/member/idCheck",
 				contentType : "application/json; charset=UTF-8",
 				success : function(data){
 					if(data.cnt > 0 ){
@@ -204,7 +250,7 @@ $(document).ready(function(){
 	
 	$('form').on('submit', function(){
 		
-		val inval_Arr = new Array(8).fill(false);
+		val inval_Arr = new Array(6).fill(false);
 		
 		if(idJ.test($("#mId").val())){
 			inval_Arr[0] = true;
@@ -213,67 +259,68 @@ $(document).ready(function(){
 			alert('아이디를 확인하세요.');
 			return false;
 		}
-	});
+
 	
-	// 비밀번호가 같을 경우 && 비밀번호 정규식
-	if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test(($('$mPw').val())) {
-		inval_Arr[1] = true;
-	} else {
-		inval_Arr[1] = false;
-		alert('비밀번호를 확인하세요.');
-		return false;
-	}
-	
-	// 이름 정규식
-	if(nameJ.test($('#mName').val())) {
-		inval_Arr[2] = true;
-	} else {
-		inval_Arr[2] = false;
-		alert('이름을 확인하세요.');
-		return false;
-	}}
-	
-	// E-mail 정규식
-	if(mailJ.test($('#mEmail').val())) {
-		console.log(mailJ.test($('#mEmail').val()));
-		inval_Arr[3] = true;
-	} else {
-		inval_Arr[3] = false;
-		alert('이메일을 확인하세요.');
-		return false;
-	}
-	
-	//휴대전화 정규식
-	if(phoneJ.test($('#mPhone').val())){
-		console.log(phone.test($('#mPhone').val()));
-		inval_Arr[4] = true;
-	} else {
-		inval_Arr[4] = false;
-		alert('휴대전화번호 확인하세요.');
-		return false;
-	}
-	
-	//주소 확인
-	if(adress.val() == ''){
-		inval_Arr[5] = false;
-		alert('주소를 확인하세요.');
-		return false;
-	} else {
-		inval_Arr[5] = true;
-	}
-	
-	//전체 유효성 검사
-	val validAll = true;
-	for (var i = 0; i < inval_Arr.length; i++){
-		if (inval_Arr[i] == false){
-			validAll = false;
+		// 비밀번호가 같을 경우 && 비밀번호 정규식
+		if(($('#mPw').val() == ($('#mPw2').val()) && pwJ.test(($('$mPw').val())) {
+			inval_Arr[1] = true;
+		} else {
+			inval_Arr[1] = false;
+			alert('비밀번호를 확인하세요.');
+			return false;
 		}
-	}
-	if(validAll == true){ //유효성 통과
-		alert("MSM 회원가입을 환영합니다.");	
-	} else {
-		alert("정보를 다시 확인해주세요.");
-	}
+		
+		// 이름 정규식
+		if(nameJ.test($('#mName').val())) {
+			inval_Arr[2] = true;
+		} else {
+			inval_Arr[2] = false;
+			alert('이름을 확인하세요.');
+			return false;
+		}
+		
+		// E-mail 정규식
+		if(mailJ.test($('#mEmail').val())) {
+			console.log(mailJ.test($('#mEmail').val()));
+			inval_Arr[3] = true;
+		} else {
+			inval_Arr[3] = false;
+			alert('이메일을 확인하세요.');
+			return false;
+		}
+		
+		//휴대전화 정규식
+		if(phoneJ.test($('#mPhone').val())){
+			console.log(phone.test($('#mPhone').val()));
+			inval_Arr[4] = true;
+		} else {
+			inval_Arr[4] = false;
+			alert('휴대전화번호 확인하세요.');
+			return false;
+		}
+		
+		//주소 확인
+		if(adress.val() == ''){
+			inval_Arr[5] = false;
+			alert('주소를 확인하세요.');
+			return false;
+		} else {
+			inval_Arr[5] = true;
+		}
+	
+		//전체 유효성 검사
+		val validAll = true;
+		for (var i = 0; i < inval_Arr.length; i++){
+			if (inval_Arr[i] == false){
+				validAll = false;
+			}
+		}
+		if(validAll == true){ //유효성 통과
+			alert("MSM 회원가입을 환영합니다.");	
+		} else {
+			alert("정보를 다시 확인해주세요.");
+		}
+	});
 	
 	$('#mPw').blur(function(){
 		if(pwJ.test($('#mPw').val())){
@@ -316,6 +363,7 @@ $(document).ready(function(){
 			$('#mEmail_check').css('color', 'red');
 		}
 	});
+});
 	
 function execPostCode(){
 	new daum.Postcode({
@@ -357,7 +405,6 @@ function execPostCode(){
 }
 	
 	
-});
 
 
 

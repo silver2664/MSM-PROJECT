@@ -1,5 +1,8 @@
 package com.project.member.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ import com.project.msm.util.RegisterRequest;
 public class UserServiceImpl implements UserService {
 	
 	@Resource(name="userDAO")
-	private UserDAO userDAO;	
+	private UserDAO userDAO;
 
 	@Override
 	public void insertUser(RegisterRequest regReq) throws Exception {
@@ -32,6 +35,18 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		userDAO.insertUser(regReq);
+		
+	}
+	
+	@Override
+	public void insertUser2(MemberVO memberVO) throws Exception {
+		userDAO.insertUser2(memberVO);
+	}
+	
+	@Override
+	public int idCheck(Map<String, Object> map) throws Exception {
+		System.out.println("Service idCheck");
+		return userDAO.idCheck(map);
 		
 	}
 	

@@ -1,5 +1,8 @@
 package com.project.member.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,5 +32,18 @@ public class UserDAOlmpl implements UserDAO {
 		sqlSession.insert("userMapper.register", regReq);
 
 	}
-
+	
+	@Override
+	public void insertUser2(MemberVO vo) throws Exception {
+		sqlSession.insert("userMapper.register", vo);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public int idCheck(Map<String, Object> map) throws Exception {
+		System.out.println("DAO idCheck");
+		Map<String, Object> resultMap = (Map<String, Object>)sqlSession.selectOne("userMapper.idCheck", map);
+		int result = Integer.valueOf(String.valueOf(resultMap.get(map)));
+		return result;
+	}
 }

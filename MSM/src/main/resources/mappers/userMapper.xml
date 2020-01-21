@@ -59,4 +59,13 @@
 		]]>		
 	</insert>
 	
+	<!-- idCheck -->
+	<select id = "idCheck" resultType = "HashMap" parameterType = "HashMap">
+		<![CDATA[
+			SELECT COUNT(MID) AS RESULT
+			FROM MSM_MEMBER
+			WHERE MID = #{mId}
+		]]>
+	</select>
+	
 </mapper>
