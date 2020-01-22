@@ -46,4 +46,10 @@ public class UserDAOlmpl implements UserDAO {
 		int result = Integer.valueOf(String.valueOf(resultMap.get(map)));
 		return result;
 	}
+	
+	@Override
+	public MemberVO idCheck2(MemberVO vo) throws Exception {			
+		System.out.println("idCheck2 method(DAO)");
+		return (MemberVO)sqlSession.selectOne("userMapper.idCheck2", vo);
+	}
 }

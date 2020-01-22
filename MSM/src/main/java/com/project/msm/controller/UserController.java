@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,14 +75,15 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/member/idCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public int idCheck(CommandMap commandMap) throws Exception {
+	@RequestMapping(value = "/member/idCheck")	
+	public @ResponseBody int idCheck(MemberVO vo, ModelAndView mv) throws Exception {
 		logger.info("controller idCheck");
-	
-		int cnt = userService.idCheck(commandMap.getMap());
-		System.out.println("count : " + cnt);
 		
+		int cnt = 0;
+		MemberVO mVo = userService.idCheck2(vo);
+		if(mVo!=null) {
+			cnt = 1;		
+		}
 		return cnt;
 	}
 	

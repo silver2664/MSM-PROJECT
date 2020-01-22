@@ -68,4 +68,17 @@
 		]]>
 	</select>
 	
+	<!-- idCheck2 -->
+	<select id = "idCheck2" resultType = "com.project.member.vo.MemberVO">
+	<![CDATA[
+		SELECT
+			MID,
+			MNAME
+		FROM
+			MSM_MEMBER
+		WHERE
+			MID = #{mId}
+	]]>
+	</select>
+	
 </mapper>

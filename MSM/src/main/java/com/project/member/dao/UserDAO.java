@@ -3,6 +3,7 @@ package com.project.member.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import com.project.member.vo.MemberVO;
 import com.project.msm.util.RegisterRequest;
 
@@ -22,6 +23,9 @@ public interface UserDAO {
 	
 	// 05. idCheck
 	public int idCheck(Map<String, Object> map) throws Exception;
+	
+	// 06. idChek2
+	public MemberVO idCheck2(MemberVO vo) throws Exception;
 	
 	
 }

@@ -16,4 +16,6 @@ public interface UserService {
 	public void insertUser2(MemberVO memberVO) throws Exception;
 	
 	public int idCheck(Map<String, Object> map) throws Exception;
+	
+	public MemberVO idCheck2(MemberVO vo) throws Exception;
 }

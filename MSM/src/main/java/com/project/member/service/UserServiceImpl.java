@@ -50,5 +50,12 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	@Override
+	public MemberVO idCheck2(MemberVO vo) throws Exception {
+		
+		System.out.println("idCheck2 method(service)");
+		return userDAO.idCheck2(vo);
+	}
+	
 
 }

@@ -20,14 +20,15 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
-<link href = "resources/css/home.css" rel = "stylesheet"> <!-- resources/css/home.css 로 style 관리 -->
+ <!-- resources/css/home.css 로 style 관리 -->
+<link href = "resources/css/home.css" rel = "stylesheet">
 </head>
 <body>
 <!-- Header Navbar -->
 <nav class = "navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
 	<div class = "container-fluid">
 		<!-- BRAND -->
-		<a class = "navbar-brand wave-effect" href = "#" target = "_blank">
+		<a class = "navbar-brand wave-effect" href = "/home" target = "_blank">
 			<strong class = "blue-text">MSM</strong>
 		</a>
 		<!-- Collapse Menu -->
