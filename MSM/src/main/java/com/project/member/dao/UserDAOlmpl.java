@@ -1,6 +1,5 @@
 package com.project.member.dao;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -48,8 +47,9 @@ public class UserDAOlmpl implements UserDAO {
 	}
 	
 	@Override
-	public MemberVO idCheck2(MemberVO vo) throws Exception {			
-		System.out.println("idCheck2 method(DAO)");
-		return (MemberVO)sqlSession.selectOne("userMapper.idCheck2", vo);
+	public int idCheck2(String mId) throws Exception {			
+		System.out.println("idCheck2 method(DAO) mId : " + mId);
+		int result = sqlSession.selectOne("userMapper.idCheck2", mId);
+		return result;
 	}
 }

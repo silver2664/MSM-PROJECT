@@ -71,14 +71,14 @@
 	<!-- authentication-provider는 인증처리하는 엘리먼트 -->
 	<!-- user-service-ref 속성은 스프링시큐리티에서 데이터베이스에  요청에 대해 사용자이름/비밀번호를 다시 스프링으로 제공해 줄 서비스 클래스 객체 등록-->
 	<authentication-manager>
-		<authentication-provider user-service-ref="customUserDetailsService">
-			<password-encoder ref = "passwordEncoder"></password-encoder>
+		<authentication-provider user-service-ref="UserLoginService">
+			<!--  <password-encoder ref = "passwordEncoder"></password-encoder> -->
 		</authentication-provider>
 	</authentication-manager>
 	
 	<!-- user-service-ref로 사용할 bean 정의(해당 클래스를 자바 클래스로 만들어 주어야 함. -->
 	
-	<beans:bean id = "customUserDetailsService" class = "com.project.msm.security.CustomUserDetailsService" />
+	<beans:bean id = "UserLoginService" class = "com.project.member.service.UserLoginService" />
 	<beans:bean id = "passwordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	
 </beans:beans>

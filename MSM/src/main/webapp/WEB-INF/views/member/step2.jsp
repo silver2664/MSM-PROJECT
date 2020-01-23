@@ -47,7 +47,7 @@
 			<div class = "form-group">
 				<label for = "mPw">비밀번호</label>
 				<input type = "password" class = "form-control" id = "mPw" name = "mPw" placeholder = "PassWord"/>
-				<div class = "eheck_font" id = "pw_check"><span>* 8-15 자의 [문자/숫자/특수문자] 를 사용할 수 있습니다.</span></div>
+				<div class = "eheck_font" id = "pw_check"><span style = "color : blue"> * 8-15 자의 [문자/숫자/특수문자]를 조합하세요. </span></div>
 			</div>
 			
 			<div class = "form-group">
@@ -71,7 +71,7 @@
 			<div class = "form-group">
 				<label for = "mPhone">휴대전화</label>
 				<input type = "tel" class = "form-control" id = "mPhone" name = "mPhone" placeholder = "Phone Number"/>
-				<div class = "eheck_font" id = "phone_check"></div>
+				<div class = "eheck_font" id = "phone_check"><span style = "color : blue">[" - "] 없이 번호로만 작성해주세요.</span></div>
 			</div>
 			
 			<div class = "form-group">
@@ -111,25 +111,35 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
-// ================= ID 중복체크 AJAX ================= //
-
-$(document).ready(function(){	
+//모든 공백 체크 정규식
+var empJ = /\s/g;
+//ID 정규식
+var idJ = /^[a-z0-9]{3,12}$/;
+//비밀번호 정규식
+var pwJ = /^.*(?=^.{7,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+//이름 정규식
+var nameJ = /^[가-힣]{2,6}$/;
+//이메일 검사 정규식
+var mailJ = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+//휴대폰 번호 정규식
+var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+// 주소입력 시 사용
+var address = $('#mSecond_Addr');
+//================= ID 중복체크 AJAX ================= //
+$(document).ready(function(){			
 	
-	var idCheck = 0;
-	var idJ = RegExp(/^[A-Za-z0-9_\-]{5,20}$/);
-	var pwJ = /^[A-Za-z0-9]{4,12}$/;
-	var mId = {"mId" : $('#mId').val()};
 	// ID 중복 확인
 	$('#mId').blur(function(){
-		if($('#mId').val() == ''){
-			$("#id_check").text('아이디를 입력하세요.');
+		if(($('mId').val()) == ''){
+			$("#id_check").text('아이디를 입력하세요.');			
 			$("#id_check").css("color", "red");
-		} else if(idJ.test($("#mId").val()) != true){
-			$("#id_check").text('4-12자의 영문, 숫자만 사용 가능합니다.');
+		} else if(idJ.test(($('#mId').val())) != true){
+			$("#id_check").text('공백없이 4-12자의 영문 소문자와 숫자만 사용 가능합니다.');
 			$("#id_check").css("color", "red");			
-		} else if($("#mId").val().length > 4){			
+		} else if (($('#mId').val()).length > 3){
+			var mId = $('#mId').val();
 			$.ajax({
-				data : mId,								
+				data : {"mId" : mId},								
 				url : "/member/idCheck",
 				/*
 				beforeSend : function(xhr) {
@@ -140,23 +150,12 @@ $(document).ready(function(){
 					console.log("data : " + data);
 					if(data > 0 ){
 						$("#id_check").text('중복된 아이디입니다.');
+						$("#id_check").css('color', 'red');
 						$("#usercheck").attr('disabled', true);
 					} else {
-						if(idJ.test(mId)){
-							$('#id_check').text('사용 가능한 ID입니다.');
-							$('#id_check').css('color', 'blue');
-							$('#usercheck').attr('disabled', false);
-						}
-						else if (mId = ''){
-							$('#id_check').text('ID를 입력해주세요.');
-							$('#id_check').css('color', 'blue');
-							$('#usercheck').attr('disabled', true);
-						}
-						else {
-							$('#id_check').text('ID는 소문자와 숫자 4-12 자리만 가능합니다.');
-							$('#id_check').css('color', 'red');
-							$('#usercheck').attr('disabled', true);
-						}
+						$('#id_check').text('사용 가능한 ID입니다.');
+						$('#id_check').css('color', 'blue');
+						$('#usercheck').attr('disabled', false);						
 					}
 				},
 				error : function(request, status, error){
@@ -164,30 +163,55 @@ $(document).ready(function(){
 				}
 			});
 		}
-	});	
-});
-
-</script>
-
-
-<script>
-
-//모든 공백 체크 정규식
-var empJ = /\s/g;
-//아이디 정규식
-var idJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
-// 비밀번호 정규식
-var pwJ = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-// 이름 정규식
-var nameJ = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
-// 이메일 검사 정규식
-var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-// 휴대폰 번호 정규식
-var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-
-var address = $('#mSecond_Addr');
-
-$(document).ready(function(){
+	});
+	
+	
+	// Password 유효성 검사
+	$('#mPw').blur(function(){
+		if(pwJ.test($('#mPw').val())){
+			console.log('true');
+			$('#pw_check').text('유효한 비밀번호입니다.');
+			$('#pw_check').css('color', 'blue');
+		} else {
+			console.log('false');
+			$('#pw_check').text(' *8-15 자의 [문자/숫자/특수문자]를 조합하세요. ');
+			$('#pw_check').css('color', 'red');
+		}
+	});
+	
+	// 패스워드 일치 확인
+	$('#mPw2').blur(function(){
+		if($('#mPw').val() != $('#mPw2').val()){
+			$('#pw2_check').text('비밀번호가 일치 하지 않습니다.');
+			$('#pw2_check').css('color', 'red');
+		} else {
+			$('#pw2_check').text('비밀번호 일치하였습니다.');
+			$('#pw2_check').css('color', 'blue');
+		}
+	});
+	
+	// 이름에 특수문자 들어가지 않도록 설정
+	$('#mName').blur(function(){
+		if(nameJ.test($('#mName').val())){
+			console.log(nameJ.test($('#mName').val()));
+			$('#name_check').text('');
+		} else {
+			$("#name_check").text('한글 2-6자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
+			$("#name_check").css('color', 'red');
+		}
+	});
+	
+	// 이메일 양식 검사
+	$("#mEmail").blur(function(){
+		if(mailJ.test($('#mEmail').val())){
+			$('#email_check').text('');
+		} else {
+			$('#email_check').text('이메일을 확인해주세요.');
+			$('#email_check').css('color', 'red');
+		}
+	});
+	
+	/*=== Form 제출 클릭 후 최종 유효성 체크 ===*/
 	
 	$('form').on('submit', function(){
 		
@@ -202,7 +226,7 @@ $(document).ready(function(){
 		}
 		
 		// 비밀번호가 같을 경우 && 비밀번호 정규식		
-		if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('mPw').val()))
+		if(($('#mPw').val() == ($('#mPw2').val())) && pwJ.test($('#mPw').val()))
 			inval_Arr[1] = true;		
 		else {
 			inval_Arr[1] = false;
@@ -261,54 +285,12 @@ $(document).ready(function(){
 			alert("정보를 다시 확인해주세요.");
 		}
 	});
-	
-	$('#mPw').blur(function(){
-		if(pwJ.test($('#mPw').val())){
-			consolse.log('true');
-			$('#pw_check').text('유효한 비밀번호입니다.');
-		} else {
-			console.log('false');
-			$('#pw_check').text('8-15 자의 [문자/숫자/특수문자] 를 사용할 수 있습니다.');
-			$('#pw_check').css('color', 'red');
-		}
-	});
-	
-	// 패스워드 일치 확인
-	$('#mPw2').blur(function(){
-		if($('#mPw').val() != $(this).val()){
-			$('#mPw2').text('비밀번호가 일치 하지 않습니다.');
-			$('#mPw2').css('color', 'red');
-		} else {
-			$('#pw2_check').text('비밀번호 일치하였습니다.');
-		}
-	});
-	
-	// 이름에 특수문자 들어가지 않도록 설정
-	$('#mName').blur(function(){
-		if(nameJ.test($(this).val())){
-			console.log(nameJ.test($(this).val()));
-			$('#name_check').text('');
-		} else {
-			$("#name_check").text('한글 2-4자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
-			$("#name_check").css('color', 'red');
-		}
-	});
-	
-	// 이메일 양식 검사
-	$("#mEmail").blur(function(){
-		if(mailJ.test($(this).val())){
-			$('#mEmail_check').text('');
-		} else {
-			$('#mEmail_check').text('이메일을 확인해주세요.');
-			$('#mEmail_check').css('color', 'red');
-		}
-	});
 });
-	
-</script> 
 
+</script>
+
+<!-- ========= 다음 주소 API ========= -->
 <script>
-
 function execPostCode(){
 	new daum.Postcode({
 		oncomplete : function(data){

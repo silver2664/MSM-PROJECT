@@ -1,6 +1,6 @@
 package com.project.member.service;
 
-import java.util.HashMap;
+
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -14,7 +14,7 @@ import com.project.msm.exception.AlreadyExistingIdException;
 import com.project.msm.util.RegisterRequest;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {	
 	
 	@Resource(name="userDAO")
 	private UserDAO userDAO;
@@ -51,10 +51,10 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public MemberVO idCheck2(MemberVO vo) throws Exception {
-		
-		System.out.println("idCheck2 method(service)");
-		return userDAO.idCheck2(vo);
+	public int idCheck2(String mId) throws Exception {		
+		System.out.println("idCheck2 method(service) mId : " + mId);
+		int result = userDAO.idCheck2(mId);
+		return result;
 	}
 	
 

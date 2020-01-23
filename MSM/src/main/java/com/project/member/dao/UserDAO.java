@@ -25,7 +25,7 @@ public interface UserDAO {
 	public int idCheck(Map<String, Object> map) throws Exception;
 	
 	// 06. idChek2
-	public MemberVO idCheck2(MemberVO vo) throws Exception;
+	public int idCheck2(String mId) throws Exception;
 	
 	
 }

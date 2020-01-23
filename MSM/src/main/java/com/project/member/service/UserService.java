@@ -17,5 +17,5 @@ public interface UserService {
 	
 	public int idCheck(Map<String, Object> map) throws Exception;
 	
-	public MemberVO idCheck2(MemberVO vo) throws Exception;
+	public int idCheck2(String mId) throws Exception;
 }

@@ -20,8 +20,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 <!-- Material Design Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
- <!-- resources/css/home.css 로 style 관리 -->
-<link href = "resources/css/home.css" rel = "stylesheet">
+<!-- resource CSS -->
+<link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 </head>
 <body>
 <!-- Header Navbar -->
@@ -75,7 +75,7 @@
 											</div>
 											<button class = "btn btn-primary text-white my-4" id = "logBtn" type = "submit">SIGN IN</button>
 											<p class = "text-white">Not Member?
-												<a data-toggle = "modal" href = "#signUp" style = "display : inline; color : white; padding : 4px; font-size : 16px">REGISTER</a>
+												<a href = "/member/step1" style = "display : inline; color : white; padding : 4px; font-size : 16px">REGISTER</a>
 											</p>
 											<c:if test ="${not empty param.fail}">
 												<div class = col-md-12>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +35,9 @@ public class UserController {
 	
 	@Resource(name = "userService")
 	UserService userService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/member/step1", method = RequestMethod.GET)
 	// Handler Level Mapping : 요청 url에 대해 해당 메서드가 함. (* member/step1의 GET 요청에 대한 처리를 함. )
@@ -70,20 +75,20 @@ public class UserController {
 	@RequestMapping(value = "/member/step3", method = RequestMethod.POST)
 	public ModelAndView step3(ModelAndView mv, MemberVO memberVO) throws Exception {
 		logger.info("signUp step3");
+		String inputPass = memberVO.getmPw();
+		String mPw = passwordEncoder.encode(inputPass);
+		memberVO.setmPw(mPw);
 		userService.insertUser2(memberVO);
-		mv.setViewName("/home");
+		mv.setViewName("redirect:/home");
 		return mv;
 	}
 	
 	@RequestMapping(value = "/member/idCheck")	
-	public @ResponseBody int idCheck(MemberVO vo, ModelAndView mv) throws Exception {
-		logger.info("controller idCheck");
+	public @ResponseBody int idCheck(String mId) throws Exception {
 		
-		int cnt = 0;
-		MemberVO mVo = userService.idCheck2(vo);
-		if(mVo!=null) {
-			cnt = 1;		
-		}
+		logger.info("controller idCheck");		
+		int cnt = userService.idCheck2(mId);
+		System.out.println("Controller Cnt : " + cnt);
 		return cnt;
 	}
 	

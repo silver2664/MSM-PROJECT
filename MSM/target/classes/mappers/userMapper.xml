@@ -69,16 +69,21 @@
 	</select>
 	
 	<!-- idCheck2 -->
-	<select id = "idCheck2" resultType = "com.project.member.vo.MemberVO">
+	<select id = "idCheck2" resultType = "Int" parameterType = "String">
 	<![CDATA[
-		SELECT
-			MID,
-			MNAME
-		FROM
-			MSM_MEMBER
-		WHERE
-			MID = #{mId}
+		SELECT COUNT(*)
+		FROM MSM_MEMBER
+		WHERE MID = #{mId}
 	]]>
+	</select>
+	
+	<!-- Login Query -->
+	<select id = "selectUserById" resultType = "com.project.member.vo.MemberVO">
+		<![CDATA[
+			SELECT *
+			FROM MSM_MEMBER
+			WHERE MID = #{mId}
+		]]>
 	</select>
 	
 </mapper>
