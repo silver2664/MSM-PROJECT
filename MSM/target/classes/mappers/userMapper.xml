@@ -80,7 +80,18 @@
 	<!-- Login Query -->
 	<select id = "selectUserById" resultType = "com.project.member.vo.MemberVO">
 		<![CDATA[
-			SELECT *
+			SELECT 
+				MID,
+				MPW,
+				MNAME,
+				MEMAIL,
+				MPHONE,
+				MZIP_CODE,
+				M_FIRST_ADDR,
+				M_SECOND_ADDR,
+				AUTHORITY,
+				ENABLED,
+				REGDATE
 			FROM MSM_MEMBER
 			WHERE MID = #{mId}
 		]]>

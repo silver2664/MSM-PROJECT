@@ -66,6 +66,10 @@
 				<label for = "mEmail">E-mail</label>
 				<input type = "email" class = "form-control" id = "mEmail" name = "mEmail" placeholder = "EMAIL"/>
 				<div class = "eheck_font" id = "email_check"></div>
+				<button type = "button" class ="btn btn-primary" id = "emailBtn">인증메일 발송</button>
+				<input type = "hidden" path = "random" id = "random" value = "${random}"/>
+				<input type = "text" class = "form-control" id = "emailAuth" name = "emailAuth" placeholder = "인증번호 입력해주세요."/>
+				<button type = "button" class = "btn btn-primary" id = "emailAuthBtn">Email 인증하기</button>
 			</div>
 			
 			<div class = "form-group">
@@ -332,6 +336,54 @@ function execPostCode(){
 		}
 	}).open();
 }	
+</script>
+
+<!-- ===== Email 인증 Ajax =====-->
+<script>
+$(document).ready(function(){
+	$("#emailBtn").on("click", function(){
+		$.ajax({
+			type : "GET",
+			url : "/member/email/",
+			data : {
+				"Email" : $("#mEmail").val(),  
+				"random" : $("#random").val()
+			},
+			success : function(data){
+				alert("메일발송완료하였습니다." + "\n" + "인증번호를 입력해주세요.")
+			},
+			error : function(data){
+				alert("서버 에러가 발생하였습니다.")
+			}
+		});
+	});
+});
+</script>
+
+<script>
+$(document).ready(function(){
+	$("#emailAuthBtn").on("click", function(){
+		$.ajax({
+			url : "/member/emailAuth/",
+			data : {
+				"authCode" : $('#emailAuth').val(),
+				"random" : $('#random').val()
+			},
+			success : function(data){
+				console.log("data : " + data)
+				if(data == "complete"){
+					alert("인증이 완료되었습니다.")
+				}
+				else if(data == "false"){
+					alert("인증번호를 잘못입력하셨습니다.")
+				}
+			},
+			error : function(request, status, error){
+				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error)
+			}
+		});
+	});
+});
 </script>
 
 <script>

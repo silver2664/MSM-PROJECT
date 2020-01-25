@@ -2,13 +2,17 @@ package com.project.msm.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -36,7 +40,7 @@ public class UserController {
 	@Resource(name = "userService")
 	UserService userService;
 	
-	@Autowired
+	@Autowired	
 	PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "/member/step1", method = RequestMethod.GET)
@@ -61,15 +65,21 @@ public class UserController {
 	*/
 	
 	@RequestMapping(value = "/member/step2", method = RequestMethod.POST)
-	public String step2(@RequestParam(value="agree", defaultValue="false") Boolean agree) throws Exception {
+	public ModelAndView step2(@RequestParam(value="agree", defaultValue="false") Boolean agree) throws Exception {
 		
 		logger.info("signUp step2");
 		
+		ModelAndView mv = new ModelAndView();
+		
 		if(!agree) {
-			return "/member/step1";
+			mv.setViewName("/member/step1");
+			return mv;
 			
-		}
-		return "/member/step2";		
+		}		
+		int ran = new Random().nextInt(900000) + 100000;
+		mv.setViewName("/member/step2");
+		mv.addObject("random", ran);
+		return mv;	
 	}
 	
 	@RequestMapping(value = "/member/step3", method = RequestMethod.POST)
@@ -90,6 +100,34 @@ public class UserController {
 		int cnt = userService.idCheck2(mId);
 		System.out.println("Controller Cnt : " + cnt);
 		return cnt;
+	}	
+	
+	@RequestMapping(value="/member/email", method = RequestMethod.GET)
+	public @ResponseBody boolean createEmailCheck(@RequestParam String Email, @RequestParam int random, HttpServletRequest request) {
+		logger.info("이메일발송");
+		System.out.println("RanCode : " + random);
+		HttpSession session = request.getSession(true);
+		String authCode = String.valueOf(random);
+		System.out.println("AuthCode : " + authCode);
+		session.setAttribute("authCode", authCode);
+		session.setAttribute("random", random);
+		String subject = ("회원가입 인증 코드 발급 안내입니다.");
+		StringBuilder sb = new StringBuilder();
+		sb.append("회원님의 인증 코드는 " + authCode + "입니다.");		
+		return userService.send(subject, sb.toString(), "msmproject2020", Email, null);
+	}
+	
+	@RequestMapping(value = "/member/emailAuth")
+	public @ResponseBody ResponseEntity<String> emailAuth(@RequestParam String authCode, @RequestParam int random, HttpSession session){
+		logger.info("이메일인증");
+		String originalJoinCode = authCode;
+		String originalRandom = Integer.toString(random);	
+		System.out.println("유저입력인증코드 : " + originalJoinCode + "인증코드 : " + originalRandom);
+		if(originalJoinCode.equals(originalRandom)) {
+			return new ResponseEntity<String>("complete", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("false", HttpStatus.OK);
+		}
 	}
 	
 	/*

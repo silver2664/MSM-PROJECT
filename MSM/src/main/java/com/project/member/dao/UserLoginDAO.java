@@ -13,6 +13,7 @@ public class UserLoginDAO {
 	private SqlSession sqlSession;
 	
 	public MemberVO getUserById(String mId) {
+		System.out.println("UserLoginDAO mId : " + mId);
 		return sqlSession.selectOne("userMapper.selectUserById", mId);
 	}
 	

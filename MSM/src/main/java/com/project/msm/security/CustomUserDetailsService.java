@@ -8,11 +8,13 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.project.msm.dao.BDaoTemplate;
 import com.project.msm.dto.UserDto;
 import com.project.msm.util.Constant;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
 	

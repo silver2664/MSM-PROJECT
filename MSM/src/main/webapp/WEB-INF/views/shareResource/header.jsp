@@ -5,7 +5,7 @@
 <nav class = "navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
 	<div class = "container-fluid">
 		<!-- BRAND -->
-		<a class = "navbar-brand wave-effect" href = "/home" target = "_blank">
+		<a class = "navbar-brand wave-effect" href = "/home">
 			<strong class = "blue-text">MSM</strong>
 		</a>
 		<!-- Collapse Menu -->
