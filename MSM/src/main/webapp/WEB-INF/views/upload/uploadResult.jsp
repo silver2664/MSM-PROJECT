@@ -14,6 +14,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}" />
 <title>Material Design Bootstrap</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -25,35 +26,11 @@
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 </head>
 <body>
-<h2>상품목록</h2>
-<table border = "1">
-	<tr>
-		<th>상품ID번호</th>
-		<th>상품이미지</th>
-		<th>상품명</th>
-		<th>가격</th>
-	</tr>
-	<c:forEach var = "row" items = "${list}">
-		<tr>
-			<td>
-				${row.mgNum}
-			</td>
-			<td>
-				<a href = "${path}/product/detailView/${row.mgNum}">
-					<img src = "/resources/images/${row.mgImg}" width = "120px" height = "110px">
-				</a>
-			</td>
-			<td>
-				<a href = "${path}/product/detailView/${row.mgNum}">
-					${row.mgName}
-				</a>
-			</td>
-			<td>
-				<fmt:formatNumber value = "${row.mgPrice}" pattern = "###,###,###"/>
-			</td>
-		</tr>
-	</c:forEach>
-</table>
+<%@ include file = "/WEB-INF/views/test.jsp" %>
+
+	<p>파일이 업로드 되었습니다.</p>
+	<p>파일명 : ${savedName} </p>
+
 
 <!-- SCRIPTS -->
 <!-- JQuery -->

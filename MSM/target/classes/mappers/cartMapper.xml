@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cartMapper">
+
+<!-- 01. 장바구니 추가 -->
+<insert id = "insertCart">
+	<![CDATA[
+		INSERT INTO EX_CART (CART_ID, USER_ID, PRODUCT_ID, AMOUNT)
+		VALUES (SEQ_CART.NEXTVAL, #{mId}, #{mgNum}, #{amount})
+	]]>
+</insert>
+
+<!-- 02. 장바구니 목록 -->
+<select id = "listCart" resultType = "com.project.cart.vo.CartVO">
+	<![CDATA[
+		SELECT
+			C.CART_ID AS cartId,
+			C.USER_ID AS userId,
+			P.PRODUCT_ID AS mgNum,
+			M.USER_NAME AS mName,
+			P.PRODUCT_NAME AS ngName,
+			C.AMOUNT,
+			P.PRODUCT_PRICE AS mgPrice,
+			(PRODUCT_PRICE * AMOUNT) MONEY
+		FROM
+			MSM_MEMBER M, EX_GOODS P, EX_CART C
+		WHERE M.MID = C.USER_ID
+		AND   P.MGNUM = C.PRODUCT_ID
+		AND   C.USER_ID = #{mId}
+		ORDER BY C.CART_ID			
+	]]>
+</select>
+</mapper>

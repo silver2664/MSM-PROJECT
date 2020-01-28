@@ -34,7 +34,7 @@ public class GoodsController {
 	}
 	
 	// 02. 상품상세보기
-	@RequestMapping(value = "/product/detailView/${mgNum}")
+	@RequestMapping(value = "/detailView/{mgNum}")
 	public ModelAndView detail(@PathVariable("mgNum") int mgNum, ModelAndView mav) {
 		logger.info("Goods Detail");
 		mav.setViewName("/product/detailView");
