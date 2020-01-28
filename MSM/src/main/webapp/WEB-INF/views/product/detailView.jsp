@@ -14,6 +14,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>Material Design Bootstrap</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -30,7 +31,7 @@
 <table border = "1">
 	<tr>
 		<td>
-			<img src = "/resources/images/${vo.mgImg}" width : "340" height : "300">
+			<img src = "/resources/images/${vo.mgImg}" width = "340" height = "300">
 		</td>
 		<td>
 			<table border = "1" style = "height : 300px; width : 400px;">
@@ -48,8 +49,9 @@
 				</tr>
 				<tr align = "center">
 					<td colspan = "2">
-						<form name = "form1" method = "post" action = "${path}/product/insert">
-							<input type = "hidden" name = "productId" value = "${vo.mgName}"/>
+						<form name = "form1" method = "post" action = "/cart/insert">
+							<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
+							<input type = "hidden" name = "productId" value = "${vo.mgNum}"/>
 							<select name = "amount">
 								<c:forEach begin = "1" end = "10" var = "i">
 									<option value = "${i}">${i}</option>
@@ -57,7 +59,7 @@
 							</select>&nbsp; 개
 							<input type = "submit" value = "장바구니에 담기">
 						</form>
-							<a href = "${path}/product/listView">상품목록</a>
+							<a href = "/product/listView">상품목록</a>
 					</td>
 				</tr>
 			</table>
