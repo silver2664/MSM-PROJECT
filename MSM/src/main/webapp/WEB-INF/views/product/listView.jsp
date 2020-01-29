@@ -7,7 +7,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
-<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,6 +24,8 @@
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 </head>
 <body>
+<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
+<div class = "container">
 <h2>상품목록</h2>
 <table border = "1">
 	<tr>
@@ -54,6 +55,7 @@
 		</tr>
 	</c:forEach>
 </table>
+</div>
 
 <!-- SCRIPTS -->
 <!-- JQuery -->

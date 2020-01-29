@@ -42,6 +42,7 @@ public class CartServiceImpl implements CartService {
 		
 	// 06. 장바구니 동일한 상품 레코드 확인
 	public int countCart(int productId, String userId) {
+		System.out.println("CartService countCart 메서드 실행");
 		return dao.countCart(productId, userId);
 	}
 			

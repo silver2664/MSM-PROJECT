@@ -14,6 +14,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta id = "_csrf" name = "_csrf" content = "${_csrf.token}"/>
 <title>Material Design Bootstrap</title>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -47,11 +48,14 @@
 							${row.productName}
 						</td>
 						<td style = "width : 80px; align : right">
-							<fmt:formatNumber pattern = "###,###,###" value ="${row.money}"/>
+							<fmt:formatNumber pattern = "###,###,###" value ="${row.productPrice}"/>
 						</td>
 						<td>
 							<input type = "number" style = "width : 40px;" name = "amount" value = "${row.amount}" min = "1" />
 							<input type = "hidden" name = "productId" value = "${row.productId}"/>
+						</td>
+						<td>
+							<fmt:formatNumber pattern = "###,###,###" value = "${row.money}"/>
 						</td>
 						<td style = "width : 100px;" align = "right">
 							<a href = "${path}/cart/delete?cartId=${row.cartId}">삭제</a>
@@ -62,11 +66,12 @@
 					<td colspan = "5" align = "right">
 						장바구니 금액 합계 : <fmt:formatNumber pattern = "###,###,###" value ="${map.sumMoney}"/><br/>
 						배송료 : ${map.fee}<br/>
-						전체 주문 금액 : <fmt:formatNumber pattern = "###,###,###" value = "${map.allSum}"/>
+						전체 주문 금액 : <fmt:formatNumber pattern = "###,###,###" value = "${map.allsum}"/>
 					</td>
 				</tr>
 			</table>
 			<input type = "hidden" name = "count" value ="${map.count}">
+			<input type = "hidden" name = "${_csrf.parameterName}" value = "${_csrf.token}" />
 			<button type = "submit" id = "btnUpdate">수정</button>
 		</form>
 	</c:otherwise>

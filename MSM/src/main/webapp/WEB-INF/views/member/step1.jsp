@@ -7,7 +7,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix = "sec" uri = "http://www.springframework.org/security/tags" %>
-<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,6 +27,7 @@
 </head>
 <body>
 
+<%@ include file = "/WEB-INF/views/shareResource/header.jsp" %>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">

@@ -104,7 +104,7 @@
 						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
 							Profile
 						</a>
-						<a class = "btn btn-outline-white mb-5" href = "#" target = "_blank" role = "button">
+						<a class = "btn btn-outline-white mb-5" href = "/cart/cartView" role = "button">
 							Cart
 						</a>
 						<a class = "btn btn-outline-white mb-5" href = "/board/list" role = "button">
@@ -134,7 +134,7 @@
     <div class = "carousel-inner" role = "listbox">
     	<!-- First Slide -->
     	<div class = "carousel-item active">
-    		<div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%282%29.jpg'); 
+    		<div class="view" style="background-image: url('/resources/images/indexPageImg/se2.jpg'); 
     			background-repeat: no-repeat; background-size: cover;">
     			<!-- Mask & FlexBox Option -->
     			<div class = "mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -154,7 +154,7 @@
     	</div>
     	<!-- Second Slide -->
     	<div class = "carousel-item">
-    		<div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%283%29.jpg'); 
+    		<div class="view" style="background-image: url('/resources/images/indexPageImg/se1.jpg'); 
     			background-repeat: no-repeat; background-size: cover;">
     			<!-- Mask & FlexBox Option -->
     			<div class = "mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -174,7 +174,7 @@
     	</div>
     	<!-- Third Slide -->
     	<div class = "carousel-item">
-    		<div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%285%29.jpg'); 
+    		<div class="view" style="background-image: url('/resources/images/indexPageImg/ms1.jpg'); 
     			background-repeat: no-repeat; background-size: cover;">
     			<!-- Mask & FlexBox Option -->
     			<div class = "mask rgba-black-strong d-flex justify-content-center align-items-center">

@@ -53,12 +53,12 @@ public class MemberVO implements UserDetails {
 	
 	@Override
 	public String getPassword() {
-		return "mPw";
+		return this.mPw;
 	}
 	
 	@Override
 	public String getUsername() {
-		return "mId";
+		return this.mId;
 	}
 	
 	@Override

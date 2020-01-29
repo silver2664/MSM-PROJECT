@@ -20,8 +20,14 @@ html, body, header, .carousel {
 	height: 100%
 }
 
+.view {
+	background-position : center center;
+}
+
 .carousel {
-	height: 65%
+	width : 100%;
+	height : 70%;
+	align : center;
 }
 
 .carousel .carousel-inner, .carousel .carousel-inner .active, .carousel .carousel-inner .carousel-item

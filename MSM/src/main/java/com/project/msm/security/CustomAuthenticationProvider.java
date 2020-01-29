@@ -29,8 +29,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		UsernamePasswordAuthenticationToken authToken = (UsernamePasswordAuthenticationToken) authentication; // 로그인한 유저정보를 담는다.
 		
 		UserDetails userInfo = userLoginService.loadUserByUsername(authToken.getName()); // UserDetailService에서 유저정보를 불러온다.
-		
-		
+				
 		if(userInfo == null) {
 			throw new UsernameNotFoundException(authToken.getName());
 		}
@@ -41,7 +40,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 		 
 		List<GrantedAuthority> authorities = (List<GrantedAuthority>) userInfo.getAuthorities();
 		
-		return new UsernamePasswordAuthenticationToken(userInfo, authorities);
+		return new UsernamePasswordAuthenticationToken(userInfo, null, authorities);
 	}
 	
 	private boolean matchPassword(String password, Object credentials) {
