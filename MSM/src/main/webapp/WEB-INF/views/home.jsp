@@ -1108,7 +1108,6 @@
 	
 </main>
 
-<!-- Footer -->
 <footer class = "page-footer text-center font-small mt-4">
 	<!-- Call to Action -->
 	<div class = "pt-4">

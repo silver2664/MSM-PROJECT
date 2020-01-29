@@ -1,44 +1,75 @@
 package com.project.board.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
+//Q&A DBÄÃ·³
 public class BoardVO {
-
-	private int bno;
-	private String title;
-	private String content;
-	private String writer;
-	private Date regdate;
-	public int getBno() {
-		return bno;
+	private int qid;
+	private String qtitle;
+	private Date qdate;
+	private String qcontent;
+	private String qreply;
+	private String qpw;
+	private String mid;
+	private String qwriter;
+	private int qview;
+	
+	public int getQview() {
+		return qview;
 	}
-	public void setBno(int bno) {
-		this.bno = bno;
+	public void setQview(int qview) {
+		this.qview = qview;
 	}
-	public String getTitle() {
-		return title;
+	public String getQwriter() {
+		return qwriter;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setQwriter(String qwriter) {
+		this.qwriter = qwriter;
 	}
-	public String getContent() {
-		return content;
+	public int getQid() {
+		return qid;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setQid(int qid) {
+		this.qid = qid;
 	}
-	public String getWriter() {
-		return writer;
+	public String getQtitle() {
+		return qtitle;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setQtitle(String qtitle) {
+		this.qtitle = qtitle;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getQdate() {
+		return qdate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setQdate(Date qdate) {
+		this.qdate = qdate;
 	}
+	public String getQcontent() {
+		return qcontent;
+	}
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
+	}
+	public String getQreply() {
+		return qreply;
+	}
+	public void setQreply(String qreply) {
+		this.qreply = qreply;
+	}
+	public String getQpw() {
+		return qpw;
+	}
+	public void setQpw(String qpw) {
+		this.qpw = qpw;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	
+	
 	
 	
 }

@@ -4,6 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -48,7 +49,8 @@
 	<bean name = "dao" class = "com.project.msm.dao.BDaoTemplate">
 		<property name = "template" ref = "template"></property>
 		<property name = "transactionManager" ref = "transactionManager"></property>
-	</bean>
+	</bean>	
+	
 	
 	<!-- Password Encoder -->
 	<bean name = "passwordEncoder" class = "org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
@@ -93,7 +95,16 @@
 	<bean id = "uploadPath" class = "java.lang.String">
 		<constructor-arg value = "c:/upload"/>
 	</bean>
-    
+	
+	<!-- 업로드 패스 설정 --> 
+	<!--  
+	<bean class="java.lang.String"  name="uploadPath" id="uploadPath">
+ 		<constructor-arg value="D:\MSM\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MSM\resources" />
+    </bean>
+	 -->
+	<!--  
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+     --> 
     <!-- scan -->
     <context:component-scan base-package="com.project.board.service"></context:component-scan>
     <context:component-scan base-package="com.project.board.dao"></context:component-scan>

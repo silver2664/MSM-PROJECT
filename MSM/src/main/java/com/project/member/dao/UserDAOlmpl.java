@@ -37,6 +37,7 @@ public class UserDAOlmpl implements UserDAO {
 		sqlSession.insert("userMapper.register", vo);
 	}
 	
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public int idCheck(Map<String, Object> map) throws Exception {
@@ -45,6 +46,7 @@ public class UserDAOlmpl implements UserDAO {
 		int result = Integer.valueOf(String.valueOf(resultMap.get(map)));
 		return result;
 	}
+	
 	
 	@Override
 	public int idCheck2(String mId) throws Exception {			

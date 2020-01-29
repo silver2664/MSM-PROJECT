@@ -7,7 +7,7 @@ import com.project.board.vo.ReplyVO;
 public interface ReplyDAO {
 	
 	// ¥Ò±€ ¡∂»∏
-	public List<ReplyVO> readReply(int bno) throws Exception;
+	public List<ReplyVO> readReply(int qid) throws Exception;
 	
 	// ¥Ò±€ ¿€º∫
 	public void writeReply(ReplyVO vo) throws Exception;
@@ -19,5 +19,5 @@ public interface ReplyDAO {
 	public void deleteReply(ReplyVO vo) throws Exception;
 	
 	// º±≈√ ¥Ò±€ ¡∂»∏
-	public ReplyVO selectReply(int rno) throws Exception;
+	public ReplyVO selectReply(int qid) throws Exception;
 }

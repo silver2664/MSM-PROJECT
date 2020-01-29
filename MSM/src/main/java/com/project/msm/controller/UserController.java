@@ -1,7 +1,6 @@
 package com.project.msm.controller;
 
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -15,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,11 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.member.service.UserService;
 import com.project.member.vo.MemberVO;
-import com.project.msm.exception.AlreadyExistingEmailException;
-import com.project.msm.exception.AlreadyExistingIdException;
-import com.project.msm.util.CommandMap;
-import com.project.msm.util.RegisterRequest;
-import com.project.msm.util.RegisterRequestValidator;
 
 @Controller // bean 인스턴스 생성
 @RequestMapping("/member/*") // Class Level Mapping 'member'로 들어오는 모든 요청에 대한 처리.

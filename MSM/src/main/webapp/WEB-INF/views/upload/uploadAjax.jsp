@@ -35,7 +35,7 @@
 </style>
 <body>
 
-<%@ include file = "/WEB-INF/views/test.jsp" %>
+<%@ include file = "/WEB-INF/views/ETC/test.jsp" %>
 <h2>Ajax File Upload</h2>
 <hr/>
 <div class = "fileDrop"></div>

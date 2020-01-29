@@ -17,12 +17,15 @@ public interface BoardService {
 	public int listCount(SearchCriteria scri) throws Exception;
 	
 	// 게시물 조회
-	public BoardVO read(int bno) throws Exception;
+	public BoardVO read(int qid) throws Exception;
 	
 	// 게시물 수정
 	public void update(BoardVO boardVO) throws Exception;
 	
 	// 게시물 삭제
-	public void delete(int bno) throws Exception;
+	public void delete(int qid) throws Exception;
+	
+	//글 보기
+	public BoardVO content_view(int qid) throws Exception;
 
 }

@@ -18,9 +18,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 	
 	// ¥Ò±€ ∫∏±‚
 	@Override
-	public List<ReplyVO> readReply(int bno) throws Exception {
+	public List<ReplyVO> readReply(int qid) throws Exception {
 		
-		return sql.selectList("replyMapper.readReply", bno);
+		return sql.selectList("replyMapper.readReply", qid);
 	}
 	
 	// ¥Ò±€ ¿€º∫
@@ -42,8 +42,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 	
 	// º±≈√ ¥Ò±€ ¡∂»∏
-	public ReplyVO selectReply(int rno) throws Exception {
-		return sql.selectOne("replyMapper.sectReply", rno);
+	public ReplyVO selectReply(int qid) throws Exception {
+		return sql.selectOne("replyMapper.sectReply", qid);
 	}
 
 }

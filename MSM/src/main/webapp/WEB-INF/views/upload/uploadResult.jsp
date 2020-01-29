@@ -26,7 +26,7 @@
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 </head>
 <body>
-<%@ include file = "/WEB-INF/views/test.jsp" %>
+<%@ include file = "/WEB-INF/views/ETC/test.jsp" %>
 
 	<p>파일이 업로드 되었습니다.</p>
 	<p>파일명 : ${savedName} </p>

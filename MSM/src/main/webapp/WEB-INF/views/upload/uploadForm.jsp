@@ -26,7 +26,7 @@
 <link href = "<c:url value = "/resources/css/home.css"/>" rel = "stylesheet" type = "text/css">
 </head>
 <body>
-<%@ include file = "/WEB-INF/views/test.jsp" %>
+<%@ include file = "/WEB-INF/views/ETC/test.jsp" %>
 <form action = "/upload/uploadForm" method = "post" enctype = "multipart/form-data">
 	<input type = "file"  name = "file"/>
 	<input type = "submit" value = "upload">

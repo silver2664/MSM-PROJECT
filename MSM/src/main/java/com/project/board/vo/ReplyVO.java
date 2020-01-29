@@ -1,25 +1,26 @@
 package com.project.board.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ReplyVO {
 	
-	private int bno;
-	private int rno;
+	private int qid;
+	private int rid;
 	private String content;
 	private String writer;
-	private Date regdate;
-	public int getBno() {
-		return bno;
+	private Date rdate;
+	
+	public int getQid() {
+		return qid;
 	}
-	public void setBno(int bno) {
-		this.bno = bno;
+	public void setQid(int qid) {
+		this.qid = qid;
 	}
-	public int getRno() {
-		return rno;
+	public int getRid() {
+		return rid;
 	}
-	public void setRno(int rno) {
-		this.rno = rno;
+	public void setRid(int rid) {
+		this.rid = rid;
 	}
 	public String getContent() {
 		return content;
@@ -33,17 +34,19 @@ public class ReplyVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getRdate() {
+		return rdate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRdate(Date rdate) {
+		this.rdate = rdate;
 	}
-	
 	@Override
 	public String toString() {
-		return "ReplyVO [bno=" + bno + ", rno=" + rno + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + "]";
+		return "ReplyVO [qid=" + qid + ", rid=" + rid + ", content=" + content + ", writer=" + writer + ", rdate="
+				+ rdate + "]";
 	}
+	
+	
+	
 
 }

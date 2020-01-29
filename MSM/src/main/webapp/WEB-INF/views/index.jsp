@@ -10,7 +10,6 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>MSM INDEX</title>
 <!-- Font Awesome -->
@@ -78,8 +77,6 @@ body {
 
 
 #fullpage {
-	width : 100vw;
-	height: 100vh;
 }
 #sec1 {
 	background-image : url("/resources/images/indexPageImg/ms1.jpg");
@@ -145,11 +142,11 @@ body {
 			<div class="slide" id="slide4"></div>
 		</div>
 	
-		<div class="section col-xl-12 col-md-12 com-sm-12" id ="sec2"></div>
+		<div class="section" id ="sec2"></div>
 		
-		<div class="section col-xl-12 col-md-12 com-sm-12" id ="sec3"></div>
+		<div class="section" id ="sec3"></div>
 		
-		<div class="section col-xl-12 col-md-12 com-sm-12" id ="sec4"></div>
+		<div class="section" id ="sec4"></div>
 	</div>
 </div>
 
@@ -166,14 +163,14 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"> </script>
 <script>
 function openNav() {	
-	document.getElementById("mySidenav").style.width = "250px";
+	document.getElementById("mySidenav").style.width = "300px";
 }
 function closeNav() {	
 	document.getElementById("mySidenav").style.width ="0";
 }
+
 $(document).ready(function () {
     $('#fullpage').fullpage({
-    	
     });
 });
 </script>
